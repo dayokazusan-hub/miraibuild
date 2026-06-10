@@ -1,0 +1,1040 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ミライビルド株式会社</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Bebas+Neue&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --ink:     #0D1B2A;
+  --rust:    #C85C2A;
+  --rust-l:  #E07040;
+  --off:     #F7F5F0;
+  --mid:     #8A9BAC;
+  --rule:    rgba(13,27,42,0.12);
+  --serif-d: 'Bebas Neue', sans-serif;
+  --sans:    'Noto Sans JP', sans-serif;
+  --inter:   'Inter', sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--sans);
+  background: var(--off);
+  color: var(--ink);
+  overflow-x: hidden;
+}
+
+/* ─── NAVIGATION ─────────────────────────────── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 48px;
+  height: 64px;
+  background: var(--off);
+  border-bottom: 1px solid var(--rule);
+}
+
+.nav-logo {
+  display: flex; align-items: center; gap: 12px;
+  font-family: var(--sans); font-weight: 700; font-size: 14px;
+  letter-spacing: 0.04em; color: var(--ink);
+  text-decoration: none;
+}
+
+.nav-logo img {
+  width: 36px; height: 36px;
+  object-fit: contain;
+}
+
+.nav-links {
+  display: flex; gap: 36px;
+  font-size: 13px; font-family: var(--sans); letter-spacing: 0.06em;
+}
+.nav-links a {
+  color: var(--ink); text-decoration: none; opacity: 0.7;
+  transition: opacity 0.2s;
+}
+.nav-links a:hover { opacity: 1; }
+
+.nav-cta {
+  background: var(--ink); color: var(--off);
+  border: none; padding: 10px 24px;
+  font-family: var(--sans); font-size: 13px; font-weight: 700;
+  letter-spacing: 0.08em; cursor: pointer;
+  transition: background 0.2s;
+}
+.nav-cta:hover { background: var(--rust); }
+
+/* ─── HERO ───────────────────────────────────── */
+.hero {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding-top: 64px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-left {
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 80px 48px;
+  position: relative; z-index: 2;
+}
+
+.hero-eyebrow {
+  font-family: var(--inter); font-size: 11px; font-weight: 600;
+  letter-spacing: 0.2em; color: var(--rust);
+  text-transform: uppercase; margin-bottom: 28px;
+  display: flex; align-items: center; gap: 12px;
+}
+.hero-eyebrow::before {
+  content: '';
+  display: block; width: 32px; height: 1px; background: var(--rust);
+}
+
+.hero-h1 {
+  font-family: var(--sans); font-weight: 900;
+  font-size: clamp(36px, 4vw, 56px);
+  line-height: 1.25; color: var(--ink);
+  letter-spacing: -0.02em;
+  margin-bottom: 12px;
+}
+
+.hero-en {
+  font-family: var(--serif-d);
+  font-size: clamp(60px, 7vw, 96px);
+  line-height: 0.9;
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--ink);
+  letter-spacing: 0.04em;
+  margin-bottom: 36px;
+  opacity: 0.15;
+}
+
+.hero-body {
+  font-size: 15px; line-height: 1.9;
+  color: var(--ink); opacity: 0.65;
+  max-width: 360px; margin-bottom: 48px;
+}
+
+.hero-actions {
+  display: flex; align-items: center; gap: 20px;
+}
+
+.btn-primary {
+  background: var(--rust); color: #fff;
+  border: none; padding: 16px 36px;
+  font-family: var(--sans); font-size: 14px; font-weight: 700;
+  letter-spacing: 0.08em; cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+}
+.btn-primary:hover { background: var(--rust-l); transform: translateY(-1px); }
+
+.btn-ghost {
+  background: transparent; color: var(--ink);
+  border: 1px solid rgba(13,27,42,0.3);
+  padding: 15px 32px;
+  font-family: var(--sans); font-size: 14px; font-weight: 500;
+  letter-spacing: 0.06em; cursor: pointer;
+  transition: border-color 0.2s;
+  display: flex; align-items: center; gap: 8px;
+}
+.btn-ghost:hover { border-color: var(--ink); }
+
+.hero-right {
+  position: relative; overflow: hidden;
+  background: var(--ink);
+}
+
+.hero-right-inner {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+}
+
+.arch-grid {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(247,245,240,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(247,245,240,0.04) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+.hero-big-num {
+  font-family: var(--serif-d);
+  font-size: 280px; line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(247,245,240,0.06);
+  position: absolute;
+  bottom: -20px; right: -10px;
+  letter-spacing: -0.05em;
+  user-select: none;
+}
+
+.hero-focus {
+  position: relative; z-index: 2;
+  display: flex; flex-direction: column;
+  align-items: flex-start;
+  padding: 48px;
+}
+
+.hero-stat-block {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 1px; background: rgba(247,245,240,0.1);
+  margin-bottom: 40px;
+}
+
+.hero-stat {
+  background: var(--ink);
+  padding: 32px 36px;
+  position: relative;
+}
+.hero-stat::after {
+  content: '';
+  position: absolute; bottom: 0; left: 36px; right: 36px;
+  height: 2px; background: var(--rust);
+  transform: scaleX(0); transform-origin: left;
+  transition: transform 0.4s ease;
+}
+.hero-stat:hover::after { transform: scaleX(1); }
+
+.stat-num {
+  font-family: var(--serif-d);
+  font-size: 52px; line-height: 1;
+  color: var(--off); letter-spacing: 0.02em;
+  margin-bottom: 8px;
+}
+.stat-num span { font-size: 24px; color: var(--rust); margin-left: 2px; }
+.stat-label {
+  font-family: var(--sans); font-size: 12px;
+  color: var(--mid); letter-spacing: 0.1em;
+}
+
+.hero-tag {
+  display: flex; align-items: center; gap: 12px;
+  font-family: var(--inter); font-size: 11px;
+  color: var(--mid); letter-spacing: 0.15em; text-transform: uppercase;
+}
+.hero-tag::before {
+  content: ''; display: block;
+  width: 20px; height: 1px; background: var(--rust);
+}
+
+/* ─── TICKER ─────────────────────────────────── */
+.ticker {
+  background: var(--rust);
+  overflow: hidden; height: 44px;
+  display: flex; align-items: center;
+}
+.ticker-track {
+  display: flex;
+  animation: ticker 28s linear infinite;
+  white-space: nowrap;
+}
+.ticker-item {
+  font-family: var(--inter); font-size: 12px; font-weight: 600;
+  color: #fff; letter-spacing: 0.18em; text-transform: uppercase;
+  padding: 0 40px;
+  display: flex; align-items: center; gap: 40px;
+}
+.ticker-item::after { content: '◆'; font-size: 8px; opacity: 0.6; }
+@keyframes ticker {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ─── SECTION LABEL (共通) ───────────────────── */
+.section-label {
+  font-family: var(--inter); font-size: 11px; font-weight: 600;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  margin-bottom: 24px;
+  display: flex; align-items: center; gap: 12px;
+}
+.section-label::before {
+  content: ''; display: block;
+  width: 24px; height: 1px; background: currentColor;
+}
+
+/* ─── SERVICES SECTION ───────────────────────── */
+.section-services {
+  background: var(--off);
+  padding: 100px 0;
+}
+
+.services-header {
+  padding: 0 64px;
+  margin-bottom: 56px;
+  display: flex; align-items: flex-end; justify-content: space-between;
+}
+.services-header .section-label { color: var(--rust); margin-bottom: 16px; }
+
+.services-title {
+  font-family: var(--sans); font-weight: 900;
+  font-size: clamp(28px, 3vw, 40px);
+  color: var(--ink); letter-spacing: -0.02em;
+  line-height: 1.3;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-top: 1px solid var(--rule);
+  border-left: 1px solid var(--rule);
+}
+
+.service-card {
+  border-right: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  padding: 36px 32px;
+  position: relative;
+  transition: background 0.25s;
+  cursor: default;
+}
+.service-card:hover { background: rgba(200,92,42,0.04); }
+.service-card:hover .service-card-num { color: var(--rust); }
+
+.service-card-num {
+  font-family: var(--inter); font-size: 11px; font-weight: 600;
+  letter-spacing: 0.15em; color: var(--mid);
+  margin-bottom: 20px;
+  transition: color 0.25s;
+}
+
+.service-card-name {
+  font-weight: 700; font-size: 15px;
+  color: var(--ink); margin-bottom: 12px;
+  line-height: 1.4;
+}
+
+.service-card-desc {
+  font-size: 13px; line-height: 1.8;
+  color: rgba(13,27,42,0.55);
+}
+
+.service-card-line {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  height: 2px; background: var(--rust);
+  transform: scaleX(0); transform-origin: left;
+  transition: transform 0.35s ease;
+}
+.service-card:hover .service-card-line { transform: scaleX(1); }
+
+/* 7枚：4+3 レイアウト。3枚目の行は均等に */
+.services-grid .service-card:nth-child(5),
+.services-grid .service-card:nth-child(6),
+.services-grid .service-card:nth-child(7) {
+  /* 下段3枚を均等に広げる */
+}
+
+/* ─── COMPANY SECTION ────────────────────────── */
+.section-company {
+  background: var(--ink);
+  padding: 100px 64px;
+  position: relative; overflow: hidden;
+}
+.section-company::before {
+  content: 'COMPANY';
+  font-family: var(--serif-d);
+  font-size: 180px; line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(247,245,240,0.04);
+  position: absolute;
+  bottom: 10px; right: -10px;
+  user-select: none; pointer-events: none;
+}
+
+.section-company .section-label { color: var(--rust); }
+
+.company-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: start;
+  margin-top: 48px;
+}
+
+/* 写真エリア */
+.company-photos {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 12px;
+  height: 520px;
+}
+
+.company-photo {
+  overflow: hidden;
+  background: rgba(247,245,240,0.06);
+}
+.company-photo img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: brightness(0.9) contrast(1.05);
+  transition: transform 0.5s ease;
+}
+.company-photo:hover img { transform: scale(1.04); }
+
+/* 左：縦長ビル全体（2行分） */
+.company-photo.main {
+  grid-column: 1;
+  grid-row: 1 / 3;
+}
+/* 右上：看板 */
+.company-photo.sub-left  { grid-column: 2; grid-row: 1; }
+/* 右下：MIRAIBUILDテキスト */
+.company-photo.sub-right { grid-column: 2; grid-row: 2; }
+
+/* 会社情報エリア */
+.company-info { position: relative; z-index: 1; }
+
+.company-name-en {
+  font-family: var(--serif-d);
+  font-size: 13px; letter-spacing: 0.2em;
+  color: var(--rust); margin-bottom: 16px;
+}
+
+.company-catch {
+  font-family: var(--sans); font-weight: 900;
+  font-size: clamp(22px, 2.5vw, 32px);
+  color: var(--off); line-height: 1.4;
+  margin-bottom: 32px;
+}
+
+.company-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.company-table tr {
+  border-bottom: 1px solid rgba(247,245,240,0.08);
+}
+.company-table tr:first-child {
+  border-top: 1px solid rgba(247,245,240,0.08);
+}
+.company-table th {
+  font-family: var(--inter); font-size: 11px; font-weight: 600;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--mid);
+  padding: 16px 0; text-align: left;
+  width: 120px; vertical-align: top;
+}
+.company-table td {
+  font-size: 14px; color: rgba(247,245,240,0.8);
+  padding: 16px 0; line-height: 1.7;
+}
+
+/* ─── CONTACT SECTION ────────────────────────── */
+.section-contact {
+  background: var(--off);
+  padding: 100px 48px;
+  position: relative; overflow: hidden;
+}
+.section-contact::before {
+  content: 'CONTACT';
+  font-family: var(--serif-d);
+  font-size: 200px; line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(13,27,42,0.05);
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  white-space: nowrap;
+  user-select: none; pointer-events: none;
+}
+
+.contact-inner {
+  max-width: 640px; margin: 0 auto;
+  position: relative; z-index: 1;
+}
+
+.contact-inner .section-label { color: var(--rust); }
+
+.contact-title {
+  font-family: var(--sans); font-weight: 900;
+  font-size: clamp(26px, 3.5vw, 42px);
+  color: var(--ink); margin: 16px 0 12px;
+  letter-spacing: -0.02em;
+}
+
+.contact-sub {
+  font-size: 14px; color: rgba(13,27,42,0.55);
+  line-height: 1.8; margin-bottom: 48px;
+}
+
+.contact-form {
+  display: flex; flex-direction: column; gap: 20px;
+}
+
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.form-group { display: flex; flex-direction: column; gap: 8px; }
+
+.form-label {
+  font-family: var(--inter); font-size: 11px; font-weight: 600;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--mid);
+  display: flex; align-items: center; gap: 6px;
+}
+.form-label .req {
+  background: var(--rust); color: #fff;
+  font-size: 9px; padding: 2px 5px; letter-spacing: 0.05em;
+}
+
+.form-input, .form-textarea, .form-select {
+  background: rgba(13,27,42,0.04);
+  border: 1px solid rgba(13,27,42,0.15);
+  color: var(--ink);
+  padding: 14px 16px;
+  font-family: var(--sans); font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s;
+  -webkit-appearance: none;
+}
+.form-input::placeholder, .form-textarea::placeholder { color: rgba(13,27,42,0.25); }
+.form-input:focus, .form-textarea:focus, .form-select:focus { border-color: var(--rust); }
+.form-textarea { resize: vertical; min-height: 120px; }
+
+/* お問い合わせ種別 */
+.inquiry-types {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;
+}
+.inquiry-type {
+  display: flex; align-items: center; gap: 10px;
+  padding: 12px 16px;
+  border: 1px solid rgba(13,27,42,0.15);
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+  font-size: 13px; color: var(--ink);
+  user-select: none;
+}
+.inquiry-type input[type="checkbox"] { display: none; }
+.inquiry-type .check-box {
+  width: 16px; height: 16px; flex-shrink: 0;
+  border: 1.5px solid rgba(13,27,42,0.3);
+  display: flex; align-items: center; justify-content: center;
+  transition: border-color 0.2s, background 0.2s;
+}
+.inquiry-type input:checked ~ .check-box {
+  background: var(--rust); border-color: var(--rust);
+}
+.inquiry-type input:checked ~ .check-box::after {
+  content: '✓'; color: #fff; font-size: 10px; font-weight: 700;
+}
+.inquiry-type:has(input:checked) {
+  border-color: var(--rust);
+  background: rgba(200,92,42,0.04);
+}
+
+/* 営業目的チェックボックス */
+.form-checkbox-wrap {
+  display: flex; align-items: center; gap: 12px;
+  padding: 16px;
+  border: 1px solid rgba(13,27,42,0.15);
+  cursor: pointer;
+  transition: border-color 0.2s;
+  user-select: none;
+}
+.form-checkbox-wrap:has(input:checked) { border-color: var(--rust); }
+
+.form-checkbox-wrap input[type="checkbox"] {
+  width: 18px; height: 18px; flex-shrink: 0;
+  accent-color: var(--rust); cursor: pointer;
+}
+.form-checkbox-label {
+  font-size: 13px; color: var(--ink); line-height: 1.5;
+}
+.form-checkbox-label em {
+  font-style: normal; font-weight: 700;
+}
+
+.form-submit {
+  background: var(--rust); color: #fff;
+  border: none; padding: 18px;
+  font-family: var(--sans); font-size: 14px; font-weight: 700;
+  letter-spacing: 0.1em; cursor: pointer;
+  transition: background 0.2s;
+  width: 100%;
+}
+.form-submit:hover:not(:disabled) { background: var(--rust-l); }
+.form-submit:disabled { opacity: 0.4; cursor: not-allowed; }
+
+/* ─── MAP SECTION ────────────────────────────── */
+.section-map {
+  position: relative;
+  height: 460px;
+  overflow: hidden;
+}
+
+.map-overlay {
+  position: absolute;
+  top: 0; left: 0;
+  width: 340px; height: 100%;
+  background: var(--ink);
+  z-index: 2;
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 48px 40px;
+}
+.map-overlay::after {
+  content: '';
+  position: absolute; top: 0; right: -40px; bottom: 0;
+  width: 40px;
+  background: linear-gradient(90deg, var(--ink), transparent);
+  pointer-events: none;
+}
+
+.map-overlay .section-label { color: var(--rust); margin-bottom: 20px; }
+
+.map-address-title {
+  font-family: var(--sans); font-weight: 700;
+  font-size: 18px; color: var(--off);
+  margin-bottom: 20px; line-height: 1.5;
+}
+
+.map-address-detail {
+  font-size: 13px; color: var(--mid);
+  line-height: 1.9;
+}
+.map-address-detail span {
+  display: block;
+}
+
+.map-iframe-wrap {
+  position: absolute; top: 0; left: 340px; right: 0; bottom: 0;
+  z-index: 1;
+}
+.map-iframe-wrap iframe {
+  width: 100%; height: 100%;
+  border: none; display: block;
+  filter: grayscale(30%) contrast(1.05);
+}
+
+/* ─── FOOTER ─────────────────────────────────── */
+footer {
+  background: #07111b;
+  padding: 40px 48px;
+  display: flex; align-items: center; justify-content: space-between;
+  border-top: 1px solid rgba(247,245,240,0.06);
+}
+
+.footer-left {
+  display: flex; align-items: center; gap: 12px;
+}
+.footer-logo-img {
+  width: 32px; height: 32px; object-fit: contain;
+}
+.footer-logo-text {
+  font-family: var(--sans); font-weight: 700; font-size: 13px;
+  color: rgba(247,245,240,0.5); letter-spacing: 0.06em;
+}
+
+.footer-copy {
+  font-family: var(--inter); font-size: 12px;
+  color: rgba(247,245,240,0.25); letter-spacing: 0.06em;
+}
+
+/* ─── RESPONSIVE ──────────────────────────────── */
+@media (max-width: 960px) {
+  .services-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  nav { padding: 0 20px; }
+  .nav-links { display: none; }
+
+  .hero { grid-template-columns: 1fr; }
+  .hero-left { padding: 60px 24px; }
+  .hero-right { min-height: 360px; }
+  .hero-stat-block { grid-template-columns: 1fr 1fr; }
+  .hero-focus { padding: 24px; }
+
+  .services-header { padding: 0 24px; flex-direction: column; align-items: flex-start; gap: 8px; }
+  .services-grid { grid-template-columns: 1fr 1fr; }
+  .service-card { padding: 24px 20px; }
+
+  .section-company { padding: 80px 24px; }
+  .company-layout { grid-template-columns: 1fr; gap: 40px; }
+  .company-photos { grid-template-rows: 200px 140px; }
+
+  .section-contact { padding: 80px 24px; }
+  .form-row { grid-template-columns: 1fr; }
+  .inquiry-types { grid-template-columns: 1fr; }
+
+  .section-map { height: 520px; }
+  .map-overlay { position: relative; width: 100%; height: auto; padding: 40px 24px; }
+  .map-overlay::after { display: none; }
+  .map-iframe-wrap { position: relative; left: 0; height: 280px; }
+  .section-map { display: flex; flex-direction: column; height: auto; }
+
+  footer { flex-direction: column; gap: 16px; text-align: center; padding: 32px 24px; }
+}
+
+@media (max-width: 480px) {
+  .services-grid { grid-template-columns: 1fr; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ticker-track { animation: none; }
+  .btn-primary:hover { transform: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav>
+  <a href="#" class="nav-logo">
+    <img src="assets/logo/logo_cut.png" alt="ミライビルド株式会社 ロゴ">
+    ミライビルド株式会社
+  </a>
+  <div class="nav-links">
+    <a href="#services">事業内容</a>
+    <a href="#company">会社概要</a>
+  </div>
+  <button class="nav-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
+    お問い合わせ
+  </button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <p class="hero-eyebrow">建設・住まい・地域をつなぐ</p>
+    <h1 class="hero-h1">
+      お客様のご要望に<br>寄り添い、<br>最善を尽くす。
+    </h1>
+    <p class="hero-en">MIRAI</p>
+    <p class="hero-body">
+      建設・住まい・地域に関わる幅広い事業を通じて、<br>
+      確かな未来づくりを支えます。
+    </p>
+    <div class="hero-actions">
+      <button class="btn-primary" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
+        お問い合わせ
+      </button>
+      <button class="btn-ghost" onclick="document.getElementById('company').scrollIntoView({behavior:'smooth'})">
+        会社概要を見る &nbsp;↓
+      </button>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="arch-grid"></div>
+    <div class="hero-big-num">MB</div>
+    <div class="hero-right-inner">
+      <div class="hero-focus">
+        <div class="hero-stat-block">
+          <div class="hero-stat">
+            <div class="stat-num">7<span>事業</span></div>
+            <div class="stat-label">対応領域</div>
+          </div>
+          <div class="hero-stat">
+            <div class="stat-num">2024<span>年</span></div>
+            <div class="stat-label">設立</div>
+          </div>
+          <div class="hero-stat">
+            <div class="stat-num">300<span>万円</span></div>
+            <div class="stat-label">資本金</div>
+          </div>
+          <div class="hero-stat">
+            <div class="stat-num">大阪<span></span></div>
+            <div class="stat-label">拠点</div>
+          </div>
+        </div>
+        <div class="hero-tag">Osaka-based &nbsp;·&nbsp; Est. 2024</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track">
+    <div class="ticker-item">建設業・土木建築工事</div>
+    <div class="ticker-item">リフォーム工事</div>
+    <div class="ticker-item">解体工事</div>
+    <div class="ticker-item">電気工事</div>
+    <div class="ticker-item">不動産関連事業</div>
+    <div class="ticker-item">清掃関連事業</div>
+    <div class="ticker-item">園芸関連事業</div>
+    <div class="ticker-item">Innovation for the future</div>
+    <div class="ticker-item">建設業・土木建築工事</div>
+    <div class="ticker-item">リフォーム工事</div>
+    <div class="ticker-item">解体工事</div>
+    <div class="ticker-item">電気工事</div>
+    <div class="ticker-item">不動産関連事業</div>
+    <div class="ticker-item">清掃関連事業</div>
+    <div class="ticker-item">園芸関連事業</div>
+    <div class="ticker-item">Innovation for the future</div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section class="section-services" id="services">
+  <div class="services-header">
+    <div>
+      <p class="section-label">Services</p>
+      <h2 class="services-title">大阪から、幅広い領域で<br>お客様の暮らしを支えます。</h2>
+    </div>
+  </div>
+  <div class="services-grid">
+
+    <div class="service-card">
+      <div class="service-card-num">01</div>
+      <div class="service-card-name">建設業・土木建築工事</div>
+      <div class="service-card-desc">建物や周辺環境に関わる工事を、現場状況に合わせて丁寧に進めます。</div>
+      <div class="service-card-line"></div>
+    </div>
+
+    <div class="service-card">
+      <div class="service-card-num">02</div>
+      <div class="service-card-name">リフォーム工事</div>
+      <div class="service-card-desc">住まいや店舗の改修において、使いやすさと安心感を大切に対応します。</div>
+      <div class="service-card-line"></div>
+    </div>
+
+    <div class="service-card">
+      <div class="service-card-num">03</div>
+      <div class="service-card-name">解体工事</div>
+      <div class="service-card-desc">近隣環境や安全面に配慮し、段取りの見える工事を心掛けます。</div>
+      <div class="service-card-line"></div>
+    </div>
+
+    <div class="service-card">
+      <div class="service-card-num">04</div>
+      <div class="service-card-name">電気工事</div>
+      <div class="service-card-desc">設備や建物の状況に応じた、堅実な電気工事を行います。</div>
+      <div class="service-card-line"></div>
+    </div>
+
+    <div class="service-card">
+      <div class="service-card-num">05</div>
+      <div class="service-card-name">不動産関連事業</div>
+      <div class="service-card-desc">不動産の売買・仲介・斡旋・賃貸・管理に関する事業を行います。</div>
+      <div class="service-card-line"></div>
+    </div>
+
+    <div class="service-card">
+      <div class="service-card-num">06</div>
+      <div class="service-card-name">清掃関連事業</div>
+      <div class="service-card-desc">建物等の清掃・クリーニングおよび関連するコンサルティングを行います。</div>
+      <div class="service-card-line"></div>
+    </div>
+
+    <div class="service-card">
+      <div class="service-card-num">07</div>
+      <div class="service-card-name">園芸関連事業</div>
+      <div class="service-card-desc">生花・観賞用植物・園芸用樹木の栽培・販売および関連するコンサルティングを行います。</div>
+      <div class="service-card-line"></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- COMPANY -->
+<section class="section-company" id="company">
+  <p class="section-label">Company</p>
+
+  <div class="company-layout">
+    <!-- 写真エリア -->
+    <div class="company-photos">
+      <!-- 左：縦長ビル外観 -->
+      <div class="company-photo main">
+        <img src="assets/company/company.jpeg" alt="ミライビルド株式会社 外観" style="object-position: center center;">
+      </div>
+      <!-- 右上：看板 -->
+      <div class="company-photo sub-left">
+        <img src="assets/company/signboard.jpeg" alt="ミライビルド株式会社 看板" style="object-position: center center;">
+      </div>
+      <!-- 右下：MIRAIBUILDアクセント -->
+      <div class="company-photo sub-right" style="background: rgba(13,27,42,0.6); display:flex; align-items:center; justify-content:center; border: 1px solid rgba(200,92,42,0.2);">
+        <span style="font-family:var(--serif-d); font-size:52px; line-height:1.1; color:rgba(200,92,42,0.5); letter-spacing:0.08em; text-align:center;">MIRAI<br>BUILD</span>
+      </div>
+    </div>
+
+    <!-- 会社情報エリア -->
+    <div class="company-info">
+      <p class="company-name-en">MiraiBuild Co., Ltd.</p>
+      <h2 class="company-catch">大阪から、地域の未来を<br>つくる会社。</h2>
+      <table class="company-table">
+        <tr>
+          <th>会社名</th>
+          <td>ミライビルド株式会社</td>
+        </tr>
+        <tr>
+          <th>所在地</th>
+          <td>大阪府大阪市淀川区<br>野中北1丁目1-69 3F</td>
+        </tr>
+        <tr>
+          <th>設立</th>
+          <td>2024年7月29日</td>
+        </tr>
+        <tr>
+          <th>資本金</th>
+          <td>300万円</td>
+        </tr>
+        <tr>
+          <th>営業時間</th>
+          <td>平日 9:00〜17:00</td>
+        </tr>
+        <tr>
+          <th>定休日</th>
+          <td>土日祝・夏季休暇・年末年始</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section-contact" id="contact">
+  <div class="contact-inner">
+    <p class="section-label">Contact</p>
+    <h2 class="contact-title">お気軽にご相談ください</h2>
+    <p class="contact-sub">
+      建設・リフォーム・解体・電気工事をはじめ、<br>幅広い事業に関するご相談・お見積りはこちらから。
+    </p>
+
+    <form class="contact-form" onsubmit="handleSubmit(event)" id="contactForm">
+
+      <!-- お名前 -->
+      <div class="form-group">
+        <label class="form-label">お名前 <span class="req">必須</span></label>
+        <input class="form-input" type="text" name="name" placeholder="山田 太郎" required>
+      </div>
+
+      <!-- メールアドレス -->
+      <div class="form-group">
+        <label class="form-label">メールアドレス <span class="req">必須</span></label>
+        <input class="form-input" type="email" name="email" placeholder="example@email.com" required>
+      </div>
+
+      <!-- お問い合わせ種別 -->
+      <div class="form-group">
+        <label class="form-label" style="margin-bottom:4px;">お問い合わせの種別</label>
+        <div class="inquiry-types">
+          <label class="inquiry-type">
+            <input type="checkbox" name="type" value="建設・土木">
+            <span class="check-box"></span>
+            建設・土木工事
+          </label>
+          <label class="inquiry-type">
+            <input type="checkbox" name="type" value="リフォーム">
+            <span class="check-box"></span>
+            リフォーム工事
+          </label>
+          <label class="inquiry-type">
+            <input type="checkbox" name="type" value="解体">
+            <span class="check-box"></span>
+            解体工事
+          </label>
+          <label class="inquiry-type">
+            <input type="checkbox" name="type" value="電気工事">
+            <span class="check-box"></span>
+            電気工事
+          </label>
+          <label class="inquiry-type">
+            <input type="checkbox" name="type" value="不動産">
+            <span class="check-box"></span>
+            不動産関連
+          </label>
+          <label class="inquiry-type">
+            <input type="checkbox" name="type" value="清掃・園芸">
+            <span class="check-box"></span>
+            清掃・園芸関連
+          </label>
+          <label class="inquiry-type">
+            <input type="checkbox" name="type" value="その他">
+            <span class="check-box"></span>
+            その他
+          </label>
+        </div>
+      </div>
+
+      <!-- お問い合わせ内容 -->
+      <div class="form-group">
+        <label class="form-label">お問い合わせ内容 <span class="req">必須</span></label>
+        <textarea class="form-textarea" name="message" placeholder="ご相談内容をご記入ください。" required></textarea>
+      </div>
+
+      <!-- 営業目的チェック -->
+      <label class="form-checkbox-wrap" id="salesCheckWrap">
+        <input type="checkbox" id="salesCheck" required>
+        <span class="form-checkbox-label">
+          <em>営業・勧誘目的ではありません</em><br>
+          <span style="font-size:12px; color:rgba(13,27,42,0.45);">営業・勧誘を目的としたお問い合わせはお断りしております。</span>
+        </span>
+      </label>
+
+      <button class="form-submit" type="submit" id="submitBtn" disabled>
+        送信する
+      </button>
+    </form>
+  </div>
+</section>
+
+<!-- MAP -->
+<div class="section-map">
+  <div class="map-overlay">
+    <p class="section-label">Access</p>
+    <h3 class="map-address-title">大阪市淀川区</h3>
+    <div class="map-address-detail">
+      <span>〒532-0012</span>
+      <span>大阪府大阪市淀川区</span>
+      <span>野中北1丁目1-69 3F</span>
+      <span style="margin-top:16px; color:rgba(247,245,240,0.4);">営業時間：平日 9:00〜17:00</span>
+      <span style="color:rgba(247,245,240,0.4);">定休日：土日祝・夏季・年末年始</span>
+    </div>
+  </div>
+  <div class="map-iframe-wrap">
+    <iframe
+      src="https://maps.google.com/maps?q=%E5%A4%A7%E9%98%AA%E5%BA%9C%E5%A4%A7%E9%98%AA%E5%B8%82%E6%B7%80%E5%B7%9D%E5%8C%BA%E9%87%8E%E4%B8%AD%E5%8C%971%E4%B8%81%E7%9B%AE1-69&output=embed"
+      allowfullscreen=""
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"
+      title="ミライビルド株式会社 所在地マップ">
+    </iframe>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-left">
+    <img class="footer-logo-img" src="assets/logo/logo_cut.png" alt="ミライビルド株式会社 ロゴ">
+    <span class="footer-logo-text">ミライビルド株式会社</span>
+  </div>
+  <div class="footer-copy">© 2024 MiraiBuild Co., Ltd. All rights reserved.</div>
+</footer>
+
+<script>
+// チェックボックスで送信ボタンを制御
+const salesCheck = document.getElementById('salesCheck');
+const submitBtn  = document.getElementById('submitBtn');
+salesCheck.addEventListener('change', () => {
+  submitBtn.disabled = !salesCheck.checked;
+});
+
+// フォーム送信
+function handleSubmit(e) {
+  e.preventDefault();
+  submitBtn.textContent = '送信しました ✓';
+  submitBtn.style.background = '#2a7a4a';
+  submitBtn.disabled = true;
+}
+
+// スクロールでナビの影
+window.addEventListener('scroll', () => {
+  const nav = document.querySelector('nav');
+  nav.style.boxShadow = window.scrollY > 10
+    ? '0 1px 20px rgba(13,27,42,0.08)'
+    : 'none';
+});
+</script>
+</body>
+</html>
