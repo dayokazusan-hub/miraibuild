@@ -3,7 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ミライビルド株式会社</title>
+<title>ミライビルド株式会社 | 建設・リフォーム・解体・電気工事</title>
+<meta name="description" content="ミライビルド株式会社は大阪府を中心に、建設業・リフォーム工事・解体工事・電気工事・不動産関連事業・清掃関連事業・園芸関連事業を行っています。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="ミライビルド株式会社 | 建設・リフォーム・解体・電気工事">
+<meta property="og:description" content="ミライビルド株式会社は大阪府を中心に、建設業・リフォーム工事・解体工事・電気工事・不動産関連事業・清掃関連事業・園芸関連事業を行っています。">
+<meta property="og:url" content="https://miraibuild.jp/">
+<meta property="og:image" content="https://miraibuild.jp/assets/logo/logo_cut.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="./favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="./android-chrome-192x192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="./android-chrome-512x512.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Bebas+Neue&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
@@ -71,6 +84,36 @@ nav {
   transition: background 0.2s;
 }
 .nav-cta:hover { background: var(--rust); }
+
+.nav-menu-toggle {
+  display: none;
+  width: 44px; height: 44px;
+  border: 1px solid rgba(13,27,42,0.16);
+  background: transparent;
+  align-items: center; justify-content: center;
+  flex-direction: column; gap: 6px;
+  cursor: pointer;
+}
+.nav-menu-toggle span {
+  display: block;
+  width: 22px; height: 2px;
+  background: var(--ink);
+  transition: transform 0.25s ease, opacity 0.2s ease;
+}
+
+.mobile-menu {
+  display: none;
+}
+
+.is-menu-open .nav-menu-toggle span:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+.is-menu-open .nav-menu-toggle span:nth-child(2) {
+  opacity: 0;
+}
+.is-menu-open .nav-menu-toggle span:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
 
 /* ─── HERO ───────────────────────────────────── */
 .hero {
@@ -209,8 +252,16 @@ nav {
   font-size: 52px; line-height: 1;
   color: var(--off); letter-spacing: 0.02em;
   margin-bottom: 8px;
+  white-space: nowrap;
 }
-.stat-num span { font-size: 24px; color: var(--rust); margin-left: 2px; }
+.stat-num span {
+  font-size: 24px; color: var(--rust); margin-left: 2px;
+  white-space: nowrap;
+}
+.stat-num-place {
+  font-size: 46px;
+  letter-spacing: 0;
+}
 .stat-label {
   font-family: var(--sans); font-size: 12px;
   color: var(--mid); letter-spacing: 0.1em;
@@ -364,7 +415,7 @@ nav {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr;
-  gap: 12px;
+  gap: 8px;
   height: 520px;
 }
 
@@ -647,12 +698,58 @@ footer {
 @media (max-width: 768px) {
   nav { padding: 0 20px; }
   .nav-links { display: none; }
+  .nav-cta { display: none; }
+  .nav-menu-toggle { display: flex; }
+  .mobile-menu {
+    position: absolute;
+    top: calc(100% + 10px); right: 20px;
+    display: flex; flex-direction: column;
+    min-width: 220px;
+    padding: 10px;
+    background: rgba(247,245,240,0.96);
+    border: 1px solid var(--rule);
+    box-shadow: 0 18px 40px rgba(13,27,42,0.12);
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-6px);
+    transition: opacity 0.22s ease, transform 0.22s ease;
+  }
+  .mobile-menu a {
+    color: var(--ink);
+    text-decoration: none;
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    padding: 14px 16px;
+    border-bottom: 1px solid rgba(13,27,42,0.08);
+  }
+  .mobile-menu a:last-child { border-bottom: none; }
+  .is-menu-open .mobile-menu {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
 
   .hero { grid-template-columns: 1fr; }
   .hero-left { padding: 60px 24px; }
-  .hero-right { min-height: 360px; }
-  .hero-stat-block { grid-template-columns: 1fr 1fr; }
-  .hero-focus { padding: 24px; }
+  .hero-right { min-height: clamp(330px, 52vw, 400px); }
+  .hero-stat-block {
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+    margin-bottom: clamp(24px, 3.8vw, 34px);
+  }
+  .hero-focus {
+    width: min(100%, 560px);
+    padding: clamp(24px, 4.5vw, 34px);
+  }
+  .hero-stat {
+    padding: clamp(22px, 4vw, 30px) clamp(20px, 4.5vw, 34px);
+  }
+  .hero-stat::after { left: clamp(20px, 4.5vw, 34px); right: clamp(20px, 4.5vw, 34px); }
+  .stat-num { font-size: clamp(42px, 7vw, 52px); }
+  .stat-num span { font-size: clamp(19px, 3vw, 24px); }
+  .stat-num-place { font-size: clamp(36px, 6vw, 46px); letter-spacing: 0; }
 
   .services-header { padding: 0 24px; flex-direction: column; align-items: flex-start; gap: 8px; }
   .services-grid { grid-template-columns: 1fr 1fr; }
@@ -660,7 +757,7 @@ footer {
 
   .section-company { padding: 80px 24px; }
   .company-layout { grid-template-columns: 1fr; gap: 40px; }
-  .company-photos { grid-template-rows: 200px 140px; }
+  .company-photos { height: auto; grid-template-rows: 200px 140px; gap: 8px; }
 
   .section-contact { padding: 80px 24px; }
   .form-row { grid-template-columns: 1fr; }
@@ -676,6 +773,24 @@ footer {
 }
 
 @media (max-width: 480px) {
+  .hero-left { padding: 56px 20px 48px; }
+  .hero-right { min-height: 318px; }
+  .hero-focus { padding: 22px 20px; }
+  .hero-stat-block { margin-bottom: 22px; }
+  .hero-stat { padding: 20px 18px; }
+  .hero-stat::after { left: 18px; right: 18px; }
+  .stat-num { font-size: 40px; }
+  .stat-num span { font-size: 18px; margin-left: 1px; }
+  .stat-num-place { font-size: 34px; }
+  .hero-actions { gap: 12px; }
+  .btn-primary,
+  .btn-ghost {
+    padding-left: 22px;
+    padding-right: 22px;
+    white-space: nowrap;
+  }
+
+  .company-photos { grid-template-rows: 180px 120px; }
   .services-grid { grid-template-columns: 1fr; }
 }
 
@@ -700,6 +815,16 @@ footer {
   <button class="nav-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
     お問い合わせ
   </button>
+  <button class="nav-menu-toggle" type="button" aria-label="メニューを開く" aria-expanded="false" aria-controls="mobileMenu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <a href="#services">事業内容</a>
+    <a href="#company">会社概要</a>
+    <a href="#contact">お問い合わせ</a>
+  </div>
 </nav>
 
 <!-- HERO -->
@@ -731,20 +856,20 @@ footer {
       <div class="hero-focus">
         <div class="hero-stat-block">
           <div class="hero-stat">
-            <div class="stat-num">7<span>事業</span></div>
+            <div class="stat-num">07<span>事業</span></div>
             <div class="stat-label">対応領域</div>
+          </div>
+          <div class="hero-stat">
+            <div class="stat-num">03<span>府県</span></div>
+            <div class="stat-label">対応</div>
           </div>
           <div class="hero-stat">
             <div class="stat-num">2024<span>年</span></div>
             <div class="stat-label">設立</div>
           </div>
           <div class="hero-stat">
-            <div class="stat-num">300<span>万円</span></div>
-            <div class="stat-label">資本金</div>
-          </div>
-          <div class="hero-stat">
-            <div class="stat-num">大阪<span></span></div>
-            <div class="stat-label">拠点</div>
+            <div class="stat-num stat-num-place">大阪<span>本社</span></div>
+            <div class="stat-label">所在地</div>
           </div>
         </div>
         <div class="hero-tag">Osaka-based &nbsp;·&nbsp; Est. 2024</div>
@@ -1020,6 +1145,35 @@ salesCheck.addEventListener('change', () => {
   submitBtn.disabled = !salesCheck.checked;
 });
 
+const nav = document.querySelector('nav');
+const menuToggle = document.querySelector('.nav-menu-toggle');
+const mobileMenu = document.getElementById('mobileMenu');
+
+function setMobileMenu(open) {
+  if (!nav || !menuToggle || !mobileMenu) return;
+  nav.classList.toggle('is-menu-open', open);
+  menuToggle.setAttribute('aria-expanded', String(open));
+  mobileMenu.setAttribute('aria-hidden', String(!open));
+}
+
+if (menuToggle && mobileMenu) {
+  menuToggle.addEventListener('click', () => {
+    setMobileMenu(!nav.classList.contains('is-menu-open'));
+  });
+
+  mobileMenu.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', () => setMobileMenu(false));
+  });
+
+  document.addEventListener('click', (event) => {
+    if (!nav.contains(event.target)) setMobileMenu(false);
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') setMobileMenu(false);
+  });
+}
+
 // フォーム送信
 function handleSubmit(e) {
   e.preventDefault();
@@ -1030,7 +1184,6 @@ function handleSubmit(e) {
 
 // スクロールでナビの影
 window.addEventListener('scroll', () => {
-  const nav = document.querySelector('nav');
   nav.style.boxShadow = window.scrollY > 10
     ? '0 1px 20px rgba(13,27,42,0.08)'
     : 'none';
