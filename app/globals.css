@@ -40,18 +40,37 @@ body {
   transform: translateY(0);
 }
 
-.hero-in {
-  animation: hero-in 850ms ease both;
+.hero-background {
+  background-image: url("/assets/hero/hero.png");
+  background-position: right bottom;
+  background-repeat: no-repeat;
+  background-size: auto 70%;
 }
 
-@keyframes hero-in {
-  from {
-    opacity: 0;
-    transform: translateY(16px);
+.hero-readable-overlay {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.98) 0%,
+    rgba(255, 255, 255, 0.9) 42%,
+    rgba(255, 255, 255, 0.38) 72%,
+    rgba(255, 255, 255, 0.04) 100%
+  );
+}
+
+@media (min-width: 640px) {
+  .hero-background {
+    background-position: center;
+    background-size: contain;
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+
+  .hero-readable-overlay {
+    background: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.97) 0%,
+      rgba(255, 255, 255, 0.9) 34%,
+      rgba(255, 255, 255, 0.28) 58%,
+      rgba(255, 255, 255, 0) 100%
+    );
   }
 }
 

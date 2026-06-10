@@ -37,3 +37,17 @@ NEXT_PUBLIC_SITE_URL=https://example.com
 ```
 
 `NEXT_PUBLIC_SITE_URL`はsitemap.xml、robots.txt、OGPの基準URLとして使用します。
+
+## 画像素材
+
+- ヘッダー: `public/assets/logo/logo_cut.png`
+- 会社概要: `public/assets/company/`
+- ヒーロースライダー: `public/assets/hero/`
+
+ヒーロースライダーの画像は、工事現場・重機・作業員写真を避けた生成素材を使用しています。
+
+## 公開前チェック
+
+- Formspreeの送信先URLを設定する
+- `NEXT_PUBLIC_SITE_URL`を本番ドメインに変更する
+- PC / スマホ表示でヘッダー、ヒーロー、フォームを確認する

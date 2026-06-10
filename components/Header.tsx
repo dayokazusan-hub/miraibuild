@@ -34,11 +34,11 @@ export function Header() {
       <div className="mx-auto flex h-[var(--header-height)] max-w-6xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <Link href="/" className="flex min-w-0 items-center gap-3" aria-label="トップページへ">
           <Image
-            src="/assets/logo/logo_moto.png"
-            width={46}
-            height={47}
+            src="/assets/logo/logo_cut.png"
+            width={606}
+            height={601}
             alt=""
-            className="h-10 w-10 shrink-0 object-contain"
+            className="h-10 w-10 shrink-0 object-contain sm:h-11 sm:w-11"
             priority
           />
           <span className="truncate text-sm font-bold tracking-normal text-ink sm:text-base">

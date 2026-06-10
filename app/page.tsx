@@ -6,9 +6,9 @@ import { Header } from "@/components/Header";
 import { SectionReveal } from "@/components/SectionReveal";
 import {
   companyProfile,
+  contactNotes,
   mapSrc,
-  otherAreas,
-  primaryAreas,
+  serviceAreas,
   services,
   site
 } from "@/lib/site-data";
@@ -36,63 +36,38 @@ export default function Home() {
     <>
       <Header />
       <main>
-        <section className="relative overflow-hidden bg-white pt-[calc(var(--header-height)+48px)]">
-          <div className="absolute inset-x-0 top-0 h-1 bg-[linear-gradient(90deg,#d84335,#c8942f,#15345f)]" />
-          <div className="mx-auto max-w-6xl px-4 pb-16 sm:px-6 sm:pb-20 lg:px-8">
-            <div className="hero-in grid gap-10 lg:grid-cols-[1.04fr_0.96fr] lg:items-center">
-              <div className="max-w-2xl">
-                <Image
-                  src="/assets/logo/logo_moto.png"
-                  width={120}
-                  height={122}
-                  alt="ミライビルド株式会社 ロゴ"
-                  className="mb-7 h-20 w-20 object-contain sm:h-24 sm:w-24"
-                  priority
-                />
-                <p className="mb-4 text-sm font-bold text-navy">{site.name}</p>
-                <h1 className="text-4xl font-bold leading-tight tracking-normal text-ink sm:text-5xl">
-                  {site.tagline}
-                </h1>
-                <p className="mt-6 max-w-xl text-base leading-8 text-steel sm:text-lg">
-                  {site.description}
-                  お客様や取引先様との信頼関係を大切にし、誠実な対応で一つひとつのご相談に向き合います。
-                </p>
-                <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                  <Link
-                    href="#contact"
-                    className="inline-flex min-h-12 items-center justify-center rounded bg-navy px-6 py-3 text-sm font-bold text-white shadow-soft transition hover:-translate-y-0.5 hover:bg-ink hover:shadow-lift"
-                  >
-                    お問い合わせ
-                  </Link>
-                  <Link
-                    href="#company"
-                    className="inline-flex min-h-12 items-center justify-center rounded border border-line bg-white px-6 py-3 text-sm font-bold text-ink transition hover:-translate-y-0.5 hover:border-navy hover:text-navy hover:shadow-soft"
-                  >
-                    会社概要を見る
-                  </Link>
-                </div>
-              </div>
+        <section className="relative min-h-[96vh] overflow-hidden bg-white pt-[var(--header-height)] sm:min-h-[90vh]">
+          <div className="hero-background absolute inset-0" aria-hidden="true" />
+          <div className="hero-readable-overlay absolute inset-0" aria-hidden="true" />
 
-              <div className="relative min-h-[260px] overflow-hidden rounded border border-line bg-mist p-8 shadow-soft sm:min-h-[340px]">
-                <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(255,255,255,0.94),rgba(238,243,246,0.72))]" />
-                <div className="relative flex h-full min-h-[220px] flex-col justify-between">
-                  <div className="flex justify-end">
-                    <Image
-                      src="/assets/logo/logo.png"
-                      width={260}
-                      height={260}
-                      alt=""
-                      className="h-36 w-36 object-contain opacity-95 sm:h-52 sm:w-52"
-                      priority
-                    />
-                  </div>
-                  <div>
-                    <p className="text-sm font-bold text-gold">Innovation for the future</p>
-                    <p className="mt-3 max-w-sm text-sm leading-7 text-steel">
-                      建設・住まい・地域に関わる幅広い事業を通じて、確かな未来づくりを支えます。
-                    </p>
-                  </div>
-                </div>
+          <div className="mx-auto flex min-h-[calc(96vh-var(--header-height))] max-w-6xl items-center px-4 pb-24 pt-20 sm:min-h-[calc(90vh-var(--header-height))] sm:px-6 sm:pb-28 sm:pt-16 lg:px-8">
+            <div className="relative z-10 max-w-[680px]">
+              <h1 className="text-[2.28rem] font-bold leading-[1.32] tracking-normal text-ink sm:text-[2.85rem] sm:leading-[1.28] lg:text-[3.1rem]">
+                <span className="hidden whitespace-nowrap sm:block">お客様のご要望に寄り添い</span>
+                <span className="hidden whitespace-nowrap sm:block">最善を尽くす</span>
+                <span className="block whitespace-nowrap sm:hidden">お客様のご要望に</span>
+                <span className="block whitespace-nowrap sm:hidden">寄り添い</span>
+                <span className="block whitespace-nowrap sm:hidden">最善を尽くす</span>
+              </h1>
+              <p className="mt-6 text-sm font-bold text-gold sm:text-base">
+                Innovation for the future
+              </p>
+              <p className="mt-4 whitespace-pre-line text-base leading-8 text-steel sm:text-lg">
+                {site.heroLead}
+              </p>
+              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+                <Link
+                  href="#contact"
+                  className="inline-flex min-h-12 items-center justify-center rounded bg-navy px-6 py-3 text-sm font-bold text-white shadow-soft transition hover:-translate-y-0.5 hover:bg-ink hover:shadow-lift"
+                >
+                  お問い合わせ
+                </Link>
+                <Link
+                  href="#company"
+                  className="inline-flex min-h-12 items-center justify-center rounded border border-line bg-white px-6 py-3 text-sm font-bold text-ink transition hover:-translate-y-0.5 hover:border-navy hover:text-navy hover:shadow-soft"
+                >
+                  <span>会社概要を見る</span>
+                </Link>
               </div>
             </div>
           </div>
@@ -122,11 +97,13 @@ export default function Home() {
                 title="事業内容"
                 lead="建設まわりのご相談から、住まい・不動産・環境整備まで、幅広い領域に対応します。"
               />
-              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              <div className="mx-auto grid max-w-5xl gap-4 sm:grid-cols-2 lg:grid-cols-12">
                 {services.map((service, index) => (
                   <article
                     key={service.title}
-                    className="group rounded border border-line bg-white p-5 shadow-[0_8px_24px_rgba(24,34,53,0.04)] transition duration-300 hover:-translate-y-1 hover:border-navy/30 hover:shadow-lift"
+                    className={`group rounded border border-line bg-white p-5 shadow-[0_8px_24px_rgba(24,34,53,0.04)] transition duration-300 hover:-translate-y-1 hover:border-navy/30 hover:shadow-lift ${
+                      index < 4 ? "lg:col-span-3" : "lg:col-span-4"
+                    }`}
                   >
                     <p className="text-sm font-bold text-gold">{String(index + 1).padStart(2, "0")}</p>
                     <h3 className="mt-3 text-lg font-bold leading-7 text-ink">{service.title}</h3>
@@ -146,11 +123,10 @@ export default function Home() {
                 title="対応エリア"
                 lead="大阪市淀川区を中心に、近隣地域から大阪府全域・近県までご相談を承ります。"
               />
-              <div className="grid gap-8 md:grid-cols-2">
-                <div>
-                  <h3 className="text-base font-bold text-ink">主な対応エリア</h3>
-                  <div className="mt-4 flex flex-wrap gap-3">
-                    {primaryAreas.map((area) => (
+              <div className="mx-auto grid max-w-4xl gap-3">
+                {serviceAreas.map((row, rowIndex) => (
+                  <div key={rowIndex} className="flex flex-wrap justify-center gap-3">
+                    {row.map((area) => (
                       <span
                         key={area}
                         className="rounded border border-line bg-white px-4 py-2 text-sm font-semibold text-navy shadow-sm"
@@ -159,20 +135,7 @@ export default function Home() {
                       </span>
                     ))}
                   </div>
-                </div>
-                <div>
-                  <h3 className="text-base font-bold text-ink">その他対応エリア</h3>
-                  <div className="mt-4 flex flex-wrap gap-3">
-                    {otherAreas.map((area) => (
-                      <span
-                        key={area}
-                        className="rounded border border-white/80 bg-white/70 px-4 py-2 text-sm font-semibold text-steel"
-                      >
-                        {area}
-                      </span>
-                    ))}
-                  </div>
-                </div>
+                ))}
               </div>
             </div>
           </section>
@@ -216,10 +179,13 @@ export default function Home() {
                 </div>
               </div>
 
-              <div className="mt-8 overflow-hidden rounded border border-line bg-white">
+              <div className="mx-auto mt-8 max-w-4xl overflow-hidden rounded border border-line bg-white">
                 <dl className="divide-y divide-line">
                   {companyProfile.map((item) => (
-                    <div key={item.label} className="grid gap-1 px-4 py-4 sm:grid-cols-[180px_1fr] sm:px-6">
+                    <div
+                      key={item.label}
+                      className="grid gap-2 px-6 py-4 sm:grid-cols-[170px_minmax(0,1fr)] sm:px-10 lg:px-14"
+                    >
                       <dt className="text-sm font-bold text-navy">{item.label}</dt>
                       <dd className="text-sm leading-7 text-steel">{item.value}</dd>
                     </div>
@@ -242,9 +208,17 @@ export default function Home() {
                   工事や各種ご相談について、以下のフォームよりお問い合わせください。
                   内容を確認のうえ、必要に応じて担当者よりご連絡いたします。
                 </p>
-                <p className="mt-5 rounded border border-line bg-white px-4 py-3 text-sm leading-7 text-steel">
-                  営業・勧誘目的のお問い合わせはご遠慮ください。
-                </p>
+                <div className="mt-7 rounded border border-line bg-white px-5 py-5">
+                  <p className="text-sm font-bold text-ink">ご確認ください</p>
+                  <ul className="mt-3 grid gap-2 text-sm leading-7 text-steel">
+                    {contactNotes.map((note) => (
+                      <li key={note} className="flex gap-2">
+                        <span className="mt-[0.72em] h-1 w-1 shrink-0 rounded-full bg-gold" />
+                        <span>{note}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
               <div className="rounded border border-line bg-white p-5 shadow-soft sm:p-8">
                 <ContactForm />

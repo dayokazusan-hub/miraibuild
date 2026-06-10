@@ -1,6 +1,9 @@
 export const site = {
   name: "ミライビルド株式会社",
-  tagline: "お客様のご要望に寄り添い、最善を尽くす。",
+  tagline: "innovation for the future",
+  heroCopy: "お客様のご要望に寄り添い\n最善を尽くす",
+  heroLead:
+    "建設・住まい・地域に関わる幅広い事業を通じて、\n確かな未来づくりを支えます。",
   description:
     "大阪府を中心に、建設業・リフォーム工事・解体工事・電気工事など幅広い事業を行っています。",
   address: "大阪府大阪市淀川区野中北1丁目1-69 3F",
@@ -45,15 +48,16 @@ export const services = [
   }
 ];
 
-export const primaryAreas = [
-  "大阪市淀川区",
-  "大阪市東淀川区",
-  "豊中市",
-  "吹田市",
-  "箕面市"
+export const serviceAreas = [
+  ["大阪市淀川区", "大阪市東淀川区", "豊中市", "吹田市", "箕面市"],
+  ["大阪府全域", "兵庫県", "奈良県"]
 ];
 
-export const otherAreas = ["大阪府全域", "兵庫県", "奈良県"];
+export const contactNotes = [
+  "営業・勧誘目的のお問い合わせはご遠慮ください",
+  "内容を確認のうえ、必要に応じて担当者よりご連絡いたします",
+  "電話番号・FAX番号・メールアドレスは公開しておりません"
+];
 
 export const companyProfile = [
   { label: "会社名", value: "ミライビルド株式会社" },

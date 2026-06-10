@@ -10,9 +10,9 @@ export function Footer() {
           <div className="max-w-sm">
             <div className="flex items-center gap-3">
               <Image
-                src="/assets/logo/logo_moto.png"
-                width={44}
-                height={45}
+                src="/assets/logo/logo_cut.png"
+                width={606}
+                height={601}
                 alt=""
                 className="h-10 w-10 rounded bg-white object-contain p-1"
               />
