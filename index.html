@@ -1191,16 +1191,19 @@ footer {
 
     <form class="contact-form" onsubmit="handleSubmit(event)" id="contactForm">
 
+      <!-- ハニーポット -->
+      <input type="text" name="company" autocomplete="off" tabindex="-1" style="display:none;">
+
       <!-- お名前 -->
       <div class="form-group">
         <label class="form-label">お名前 <span class="req">必須</span></label>
-        <input class="form-input" type="text" name="name" placeholder="山田 太郎" required>
+        <input class="form-input" type="text" name="name" maxlength="50" placeholder="山田 太郎" required>
       </div>
 
       <!-- メールアドレス -->
       <div class="form-group">
         <label class="form-label">メールアドレス <span class="req">必須</span></label>
-        <input class="form-input" type="email" name="email" placeholder="example@email.com" required>
+        <input class="form-input" type="email" name="email" maxlength="100" placeholder="example@email.com" required>
       </div>
 
       <!-- お問い合わせ種別 -->
@@ -1248,7 +1251,7 @@ footer {
       <!-- お問い合わせ内容 -->
       <div class="form-group">
         <label class="form-label">お問い合わせ内容 <span class="req">必須</span></label>
-        <textarea class="form-textarea" name="message" placeholder="ご相談内容をご記入ください。" required></textarea>
+        <textarea class="form-textarea" name="message" maxlength="500" placeholder="ご相談内容をご記入ください。" required></textarea>
       </div>
 
       <!-- 営業目的チェック -->
@@ -1608,15 +1611,96 @@ if (menuToggle && mobileMenu) {
 }
 
 // フォーム送信
-function handleSubmit(e) {
-e.preventDefault();
-document.getElementById('contactForm').innerHTML = `
-  <div class="form-success">
-    <strong>送信ありがとうございました。</strong>
-    内容を確認のうえ、必要に応じて担当者よりご連絡いたします。
-  </div>
-`;
+async function handleSubmit(e) {
+  e.preventDefault();
 
+  const form = e.target;
+  const submitBtn = document.getElementById('submitBtn');
+  const lastSentAt = localStorage.getItem('contactLastSentAt');
+  const now = Date.now();
+
+  if (lastSentAt && now - Number(lastSentAt) < 60000) {
+    const waitSec = Math.ceil((60000 - (now - Number(lastSentAt))) / 1000);
+    alert(`連続送信はできません。${waitSec}秒後に再度お試しください。`);
+  return;
+  }
+
+  submitBtn.disabled = true;
+  submitBtn.textContent = '送信中...';
+
+  const selectedTypes = [...form.querySelectorAll('input[name="type"]:checked')]
+    .map(input => input.value);
+
+  const data = {
+    name: form.name.value,
+    email: form.email.value,
+    type: selectedTypes.join(', '),
+    message: form.message.value,
+    company: form.company.value
+  };
+
+  //種別未選択チェック
+  if (!data.type) {
+    alert('お問い合わせ種別を選択してください。');
+    submitBtn.disabled = false;
+    submitBtn.textContent = '送信する';
+  return;
+  }
+
+  // 空文字チェック
+  if (!data.name.trim()) {
+    alert('お名前を入力してください');
+    submitBtn.disabled = false;
+    submitBtn.textContent = '送信する';
+  return;
+  }
+
+  if (!data.email.trim()) {
+    alert('メールアドレスを入力してください');
+    submitBtn.disabled = false;
+    submitBtn.textContent = '送信する';
+    return;
+  }
+
+  if (!data.message.trim()) {
+    alert('お問い合わせ内容を入力してください');
+    submitBtn.disabled = false;
+    submitBtn.textContent = '送信する';
+    return;
+  }
+
+  // 文字数チェック
+  if (
+    data.name.length > 50 ||
+    data.email.length > 100 ||
+    data.message.length > 500
+  ) {
+    alert('入力文字数が上限を超えています。');
+    submitBtn.disabled = false;
+    submitBtn.textContent = '送信する';
+  return;
+  }
+
+  try {
+    localStorage.setItem('contactLastSentAt', String(Date.now()));
+    await fetch("https://script.google.com/macros/s/AKfycbyYH5B9ok46yfoXGXGQbA5mmrVOunRdxNkjWlr0yKhwd5_BJIqAn7UReJXs7EbWyUHvVw/exec",
+    {
+      method: 'POST',
+      mode: 'no-cors',
+      body: JSON.stringify(data)
+    });
+
+    form.innerHTML = `
+      <div class="form-success">
+        <strong>送信ありがとうございました。</strong>
+        内容を確認のうえ、必要に応じて担当者よりご連絡いたします。
+      </div>
+    `;
+  } catch (error) {
+    submitBtn.disabled = false;
+    submitBtn.textContent = '送信する';
+    alert('送信に失敗しました。時間をおいて再度お試しください。');
+  }
 }
 
 // スクロールでナビの影
