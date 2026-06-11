@@ -143,7 +143,7 @@ nav {
 }
 
 .hero-h1 {
-  font-family: var(--sans); font-weight: 900;
+  font-family: var(--sans); font-weight: 700;
   font-size: clamp(36px, 4vw, 56px);
   line-height: 1.25; color: var(--ink);
   letter-spacing: -0.02em;
@@ -326,7 +326,7 @@ nav {
 .services-header .section-label { color: var(--rust); margin-bottom: 16px; }
 
 .services-title {
-  font-family: var(--sans); font-weight: 900;
+  font-family: var(--sans); font-weight: 700;
   font-size: clamp(28px, 3vw, 40px);
   color: var(--ink); letter-spacing: -0.02em;
   line-height: 1.3;
@@ -452,7 +452,7 @@ nav {
 }
 
 .company-catch {
-  font-family: var(--sans); font-weight: 900;
+  font-family: var(--sans); font-weight: 700;
   font-size: clamp(22px, 2.5vw, 32px);
   color: var(--off); line-height: 1.4;
   margin-bottom: 32px;
@@ -507,7 +507,7 @@ nav {
 .contact-inner .section-label { color: var(--rust); }
 
 .contact-title {
-  font-family: var(--sans); font-weight: 900;
+  font-family: var(--sans); font-weight: 700;
   font-size: clamp(26px, 3.5vw, 42px);
   color: var(--ink); margin: 16px 0 12px;
   letter-spacing: -0.02em;
@@ -613,6 +613,36 @@ nav {
 }
 .form-submit:hover:not(:disabled) { background: var(--rust-l); }
 .form-submit:disabled { opacity: 0.4; cursor: not-allowed; }
+.form-success {
+  padding: 32px;
+  background: rgba(200,92,42,0.05);
+  border: 1px solid rgba(200,92,42,0.2);
+  text-align: center;
+  font-size: 15px;
+  line-height: 2;
+  color: var(--ink);
+  animation: fadeIn 0.4s ease;
+}
+
+.form-success strong {
+  display: block;
+  font-size: 22px;
+  margin-bottom: 12px;
+  color: var(--rust);
+}
+
+@keyframes fadeIn {
+from {
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+to {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+}
 
 /* ─── MAP SECTION ────────────────────────────── */
 .section-map {
@@ -630,13 +660,7 @@ nav {
   display: flex; flex-direction: column; justify-content: center;
   padding: 48px 40px;
 }
-.map-overlay::after {
-  content: '';
-  position: absolute; top: 0; right: -40px; bottom: 0;
-  width: 40px;
-  background: linear-gradient(90deg, var(--ink), transparent);
-  pointer-events: none;
-}
+
 
 .map-overlay .section-label { color: var(--rust); margin-bottom: 20px; }
 
@@ -867,7 +891,7 @@ footer {
   <div class="hero-left">
     <p class="hero-eyebrow">建設・住まい・地域をつなぐ</p>
     <h1 class="hero-h1">
-      お客様のご要望に<br>寄り添い、<br>最善を尽くす。
+      地域に根ざし、<br>確かな仕事を。
     </h1>
     <p class="hero-en">MIRAI</p>
     <p class="hero-body">
@@ -1211,10 +1235,14 @@ if (menuToggle && mobileMenu) {
 
 // フォーム送信
 function handleSubmit(e) {
-  e.preventDefault();
-  submitBtn.textContent = '送信しました ✓';
-  submitBtn.style.background = '#2a7a4a';
-  submitBtn.disabled = true;
+e.preventDefault();
+document.getElementById('contactForm').innerHTML = `
+  <div class="form-success">
+    <strong>送信ありがとうございました。</strong>
+    内容を確認のうえ、必要に応じて担当者よりご連絡いたします。
+  </div>
+`;
+
 }
 
 // スクロールでナビの影
