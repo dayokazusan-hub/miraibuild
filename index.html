@@ -807,6 +807,12 @@ footer {
   font-family: var(--sans); font-weight: 700; font-size: 13px;
   color: rgba(247,245,240,0.5); letter-spacing: 0.06em;
 }
+.footer-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
 .footer-links {
   display: flex;
   gap: 20px;
@@ -945,6 +951,7 @@ footer {
   .section-map { display: flex; flex-direction: column; height: auto; }
 
   footer { flex-direction: column; gap: 16px; text-align: center; padding: 32px 24px; }
+  .footer-info { align-items: center; gap: 16px; }
 }
 
 @media (max-width: 480px) {
@@ -1300,11 +1307,13 @@ footer {
     <img class="footer-logo-img" src="assets/logo/logo_cut.png" alt="ミライビルド株式会社 ロゴ">
     <span class="footer-logo-text">ミライビルド株式会社</span>
   </div>
-  <div class="footer-links">
-    <a href="./privacy.html">プライバシーポリシー</a>
-    <a href="./policy.html">サイトポリシー</a>
+  <div class="footer-info">
+    <div class="footer-links">
+      <a href="./privacy.html">プライバシーポリシー</a>
+      <a href="./policy.html">サイトポリシー</a>
+    </div>
+    <div class="footer-copy">© 2024 MiraiBuild Co., Ltd. All rights reserved.</div>
   </div>
-  <div class="footer-copy">© 2024 MiraiBuild Co., Ltd. All rights reserved.</div>
 </footer>
 
 <script>
