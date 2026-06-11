@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/geometries/RoundedBoxGeometry.js"></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ミライビルド株式会社 | 建設・リフォーム・解体・電気工事</title>
@@ -231,6 +232,7 @@ nav {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  overflow: visible;
   gap: 28px;
 }
 
@@ -240,7 +242,7 @@ nav {
   cursor: grab;
   -webkit-user-select: none; user-select: none;
   border-radius: 2px;
-  overflow: hidden;
+  overflow: visible;
 }
 #cubeCanvas { display: block; width: 100%; height: 100%; }
 .cube-scene:active { cursor: grabbing; }
@@ -805,6 +807,22 @@ footer {
   font-family: var(--sans); font-weight: 700; font-size: 13px;
   color: rgba(247,245,240,0.5); letter-spacing: 0.06em;
 }
+.footer-links {
+  display: flex;
+  gap: 20px;
+}
+
+.footer-links a {
+  color: rgba(247,245,240,0.45);
+  text-decoration: none;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  transition: color 0.2s;
+}
+
+.footer-links a:hover {
+  color: var(--rust);
+}
 
 .footer-copy {
   font-family: var(--inter); font-size: 12px;
@@ -1279,6 +1297,10 @@ footer {
     <img class="footer-logo-img" src="assets/logo/logo_cut.png" alt="ミライビルド株式会社 ロゴ">
     <span class="footer-logo-text">ミライビルド株式会社</span>
   </div>
+  <div class="footer-links">
+    <a href="./privacy.html">プライバシーポリシー</a>
+    <a href="./policy.html">サイトポリシー</a>
+  </div>
   <div class="footer-copy">© 2024 MiraiBuild Co., Ltd. All rights reserved.</div>
 </footer>
 
@@ -1300,7 +1322,7 @@ footer {
   renderer.shadowMap.type = THREE.PCFSoftShadowMap;
   renderer.outputEncoding = THREE.sRGBEncoding;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 1.2;
+  renderer.toneMappingExposure = 0.9;
 
   // Scene
   const scene = new THREE.Scene();
@@ -1393,7 +1415,7 @@ footer {
   }
 
   // Geometry & Materials
-  const geo = new THREE.BoxGeometry(2, 2, 2);
+  const geo = new THREE.RoundedBoxGeometry(2, 2, 2, 6, 0.08);
   const mats = FACES.map(f => new THREE.MeshStandardMaterial({
     map: makeTexture(f),
     roughness: 0.25,
@@ -1402,12 +1424,23 @@ footer {
   }));
 
   const mesh = new THREE.Mesh(geo, mats);
+  const edges = new THREE.EdgesGeometry(geo);
+  const edgeLine = new THREE.LineSegments(
+  edges,
+  new THREE.LineBasicMaterial({
+    color: 0xC85C2A,
+    transparent: true,
+    opacity: 0.55
+  })
+);
+
+mesh.add(edgeLine);
   mesh.castShadow = true;
   scene.add(mesh);
 
   // 床（影受け）
   const floorGeo = new THREE.PlaneGeometry(12, 12);
-  const floorMat = new THREE.ShadowMaterial({ opacity: 0.18 });
+  const floorMat = new THREE.ShadowMaterial({ opacity: 0.08 });
   const floor = new THREE.Mesh(floorGeo, floorMat);
   floor.rotation.x = -Math.PI / 2;
   floor.position.y = -1.6;
@@ -1416,11 +1449,11 @@ footer {
 
   // ── 照明 ──
   // 環境光
-  const ambient = new THREE.AmbientLight(0xffffff, 0.4);
+  const ambient = new THREE.AmbientLight(0xffffff, 0.8);
   scene.add(ambient);
 
   // メインライト（斜め上）
-  const main = new THREE.DirectionalLight(0xfff5ee, 2.2);
+  const main = new THREE.DirectionalLight(0xfff5ee, 1.4);
   main.position.set(3, 5, 4);
   main.castShadow = true;
   main.shadow.mapSize.width  = 1024;
@@ -1428,12 +1461,12 @@ footer {
   scene.add(main);
 
   // リムライト（背後からオレンジ）
-  const rim = new THREE.DirectionalLight(0xC85C2A, 1.0);
+  const rim = new THREE.DirectionalLight(0xC85C2A, 0.6);
   rim.position.set(-3, -1, -3);
   scene.add(rim);
 
   // フィルライト（青）
-  const fill = new THREE.DirectionalLight(0x3060aa, 0.6);
+  const fill = new THREE.DirectionalLight(0x3060aa, 0.35);
   fill.position.set(-2, 2, -2);
   scene.add(fill);
 
@@ -1447,6 +1480,8 @@ footer {
   let velX = 0, velY = 0.004;
   let isDragging = false, lastMX = 0, lastMY = 0;
   let dVX = 0, dVY = 0;
+  let hoverRotX = 0;
+  let hoverRotY = 0;
 
   function getPointer(e) {
     return e.touches ? e.touches[0] : e;
@@ -1486,6 +1521,22 @@ footer {
   window.addEventListener('mouseup',  () => { isDragging = false; container.style.cursor = 'grab'; });
   window.addEventListener('touchend', () => { isDragging = false; });
 
+  container.addEventListener('mousemove', e => {
+  if (isDragging) return;
+
+  const rect = container.getBoundingClientRect();
+  const x = (e.clientX - rect.left) / rect.width - 0.5;
+  const y = (e.clientY - rect.top) / rect.height - 0.5;
+
+  hoverRotY = x * 0.35;
+  hoverRotX = y * 0.25;
+});
+
+container.addEventListener('mouseleave', () => {
+  hoverRotX = 0;
+  hoverRotY = 0;
+});
+
   // ── レンダーループ ──
   function animate() {
     requestAnimationFrame(animate);
@@ -1495,11 +1546,14 @@ footer {
     } else {
       // 慣性 + アイドル回転
       velX *= 0.92; velY *= 0.92;
-      velY += 0.00025; // ゆっくり自動回転
+      velY += 0.00015; // ゆっくり自動回転
       rotX += velX; rotY += velY;
     }
-    mesh.rotation.x = rotX;
-    mesh.rotation.y = rotY;
+    mesh.rotation.x += (rotX + hoverRotX - mesh.rotation.x) * 0.06;
+    mesh.rotation.y += (rotY + hoverRotY - mesh.rotation.y) * 0.06;
+
+    mesh.position.y =
+    Math.sin(Date.now() * 0.0012) * 0.05;
 
     // ボーダーグロウをリムライトで演出
     rim.intensity = 0.8 + 0.3 * Math.sin(Date.now() * 0.001);
