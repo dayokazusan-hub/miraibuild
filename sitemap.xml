@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://miraibuild.jp/</loc>
+    <loc>https://miraibuild.net/</loc>
+    <lastmod>2026-06-17</lastmod>
   </url>
   <url>
-    <loc>https://miraibuild.jp/privacy.html</loc>
+    <loc>https://miraibuild.net/privacy.html</loc>
+    <lastmod>2026-06-17</lastmod>
+  </url>
+  <url>
+    <loc>https://miraibuild.net/policy.html</loc>
+    <lastmod>2026-06-17</lastmod>
   </url>
 </urlset>
