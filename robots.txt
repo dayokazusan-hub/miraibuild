@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://miraibuild.jp/sitemap.xml
+Sitemap: https://miraibuild.net/sitemap.xml
